@@ -1,0 +1,74 @@
+.container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* player markers */
+.marker, .player-number{
+  width: 100px;
+  height: 35px;
+  font-size: 18px;
+  margin: 25px 3px;
+}
+
+/* GAMEBOARD BORDERS */
+.gameboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  column-gap: 0px;
+  row-gap: 0px;
+  width: 600px;
+  height: 600px;
+}
+
+.game-tile {
+  border-color: lightblue !important;
+  border-width: 5px !important;
+  margin: 0;
+  box-sizing: border-box;
+  font-size: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.game-tile:first-of-type {
+  border-style: none groove groove none;
+}
+
+.game-tile:nth-of-type(2) {
+  border-style: none groove groove groove;
+}
+
+.game-tile:nth-of-type(3) {
+  border-style: none none groove groove;
+}
+
+.game-tile:nth-of-type(4) {
+  border-style: groove groove groove none;
+}
+
+.game-tile:nth-of-type(5) {
+  border-style: groove;
+}
+
+.game-tile:nth-of-type(6) {
+  border-style: groove none groove groove;
+}
+
+.game-tile:nth-of-type(7) {
+  border-style: groove groove none none ;
+}
+
+.game-tile:nth-of-type(8) {
+  border-style: groove groove none groove;
+}
+
+.game-tile:nth-of-type(9) {
+  border-style: groove none none groove;
+}
