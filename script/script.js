@@ -1,17 +1,14 @@
 const Player = (marker) => {
   const getPlayerName = () => name;
   const getPlayerMarker = () => marker;
-  return { getPlayerMarker };
+  return { getPlayerName, getPlayerMarker };
 };
 
 const displayController = (() => {
   const gameTiles = document.querySelectorAll(".game-tile");
-  let turn = players[0];
+ const players = ["X", "O"]
 
-  const getPlayerInfo = () => {
-    const player1 = Player(document.querySelector(".player1").value, "X");
-    const player2 = document.querySelector(".player1");
-  }
+  let turn = players[0];
 
   gameTiles.forEach((tile, index) => {
     tile.addEventListener("click", (e) => {
