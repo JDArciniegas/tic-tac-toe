@@ -1,31 +1,33 @@
 const Player = (marker) => {
+  const getPlayerName = () => name;
   const getPlayerMarker = () => marker;
   return { getPlayerMarker };
 };
 
 const displayController = (() => {
   const gameTiles = document.querySelectorAll(".game-tile");
-  const players = ["X", "O"]
-  let currentPlayer = players[0];
+  let turn = players[0];
+
+  const getPlayerInfo = () => {
+    const player1 = Player(document.querySelector(".player1").value, "X");
+    const player2 = document.querySelector(".player1");
+  }
 
   gameTiles.forEach((tile, index) => {
     tile.addEventListener("click", (e) => {
-      e.target.textContent = currentPlayer;
-      gameboard.boardTiles[index] = currentPlayer;
-      console.log(gameboard.boardTiles);
+      e.target.textContent = turn;
+      gameboard.boardTiles[index] = turn;
       switchPlayers();
     });
   });
 
-  const switchPlayers = () => {
-    if (currentPlayer === players[0]){
-      currentPlayer = players[1];
-      console.log(currentPlayer);
-    } else {
-      currentPlayer = players[0];
-      console.log(currentPlayer);
-    }
+  const handleClick = () => {
+
   }
+
+  const switchPlayers = () => {
+    turn === players[0] ? (turn = players[1]) : (turn = players[0]);
+  };
 
   return { gameTiles };
 })();
