@@ -16,8 +16,8 @@ const displayController = (() => {
       e.target.textContent = turn;
       tile.classList.add("restricted");
       gameboard.boardTiles[index] = turn;
+      checkWinner(turn);
       switchPlayers(e);
-      checkWinner(gameboard.boardTiles);
     });
   });
 
@@ -25,8 +25,8 @@ const displayController = (() => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
   };
 
-  const checkWinner = (boardTiles) => {
-    let winPatterns = [
+  const checkWinner = (turn) => {
+    let winPattern = [
       [0, 1, 2],
       [3, 4, 5],
       [6, 7, 8],
@@ -34,11 +34,10 @@ const displayController = (() => {
       [1, 4, 7],
       [2, 5, 8],
       [0, 4, 8],
-      [2, 4, 6],
+      [3, 4, 6],
     ];
-    boardTiles.forEach((tile, index) => {
 
-    });
+
   };
 
   return { gameTiles };
