@@ -8,7 +8,8 @@
 }
 
 /* player markers */
-.marker, .player-number{
+.marker,
+.player-number {
   width: 100px;
   height: 35px;
   font-size: 18px;
@@ -62,7 +63,7 @@
 }
 
 .game-tile:nth-of-type(7) {
-  border-style: groove groove none none ;
+  border-style: groove groove none none;
 }
 
 .game-tile:nth-of-type(8) {
@@ -71,4 +72,8 @@
 
 .game-tile:nth-of-type(9) {
   border-style: groove none none groove;
+}
+
+.restricted {
+  pointer-events: none;
 }
