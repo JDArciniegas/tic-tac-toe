@@ -36,29 +36,48 @@ const displayController = (() => {
     let winner = false;
     for (let i = 0; i < winningPattern.length; i++) {
       const pattern = winningPattern[i];
-      const cellA = gameboard.boardTiles[pattern[0]];
-      const cellB = gameboard.boardTiles[pattern[1]];
-      const cellC = gameboard.boardTiles[pattern[2]];
-
       if (
-        cellA === player1.getPlayerMarker() &&
-        cellB === player1.getPlayerMarker() &&
-        cellC === player1.getPlayerMarker()
+        pattern.every(
+          (field) => gameboard.boardTiles[field] == player1.getPlayerMarker()
+        ) ||
+        pattern.every(
+          (field) => gameboard.boardTiles[field] == player2.getPlayerMarker()
+        )
       ) {
-        console.log(`Player ${player1.getPlayerMarker()} is the winner`);
+        // add winner action
         console.log(pattern);
-        winner = true;
-        break;
-      } else if (
-        cellA === player2.getPlayerMarker() &&
-        cellB === player2.getPlayerMarker() &&
-        cellC === player2.getPlayerMarker()
-      ) {
-        console.log(`Player ${player2.getPlayerMarker()} is the winner`);
-        console.log(pattern);
+        console.log("winner");
       } else {
+        // add draw message
         console.log("draw");
       }
+
+      // __________________________________________________
+
+      // const pattern = winningPattern[i];
+      // const cellA = gameboard.boardTiles[pattern[0]];
+      // const cellB = gameboard.boardTiles[pattern[1]];
+      // const cellC = gameboard.boardTiles[pattern[2]];
+
+      // if (
+      //   cellA === player1.getPlayerMarker() &&
+      //   cellB === player1.getPlayerMarker() &&
+      //   cellC === player1.getPlayerMarker()
+      // ) {
+      //   console.log(`Player ${player1.getPlayerMarker()} is the winner`);
+      //   console.log(pattern);
+      //   winner = true;
+      //   break;
+      // } else if (
+      //   cellA === player2.getPlayerMarker() &&
+      //   cellB === player2.getPlayerMarker() &&
+      //   cellC === player2.getPlayerMarker()
+      // ) {
+      //   console.log(`Player ${player2.getPlayerMarker()} is the winner`);
+      //   console.log(pattern);
+      // } else {
+      //   console.log("draw");
+      // }
     }
   };
 
