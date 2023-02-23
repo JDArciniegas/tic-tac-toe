@@ -34,7 +34,7 @@ const displayController = (() => {
         )
       ) {
         // add winner action
-        return true;
+        winnerMessage(turn);
       }
     }
   };
@@ -53,7 +53,7 @@ const displayController = (() => {
       e.target.textContent = turn;
       tile.classList.add("restricted");
       gameboard.boardTiles[index] = turn;
-      console.log(checkWinner());
+      checkWinner();
       checkDraw();
       switchPlayers();
     });
@@ -62,17 +62,21 @@ const displayController = (() => {
   // // add reset function
 
   const resetButton = document.querySelector("#reset");
-    resetButton.addEventListener("click", () => {
+  resetButton.addEventListener("click", () => {
     gameTiles.forEach((tile, index) => {
-      tile.textContent = ""
+      tile.textContent = "";
+      turn = players[0];
       tile.classList.remove("restricted");
-
       gameboard.boardTiles[index] = tile;
-    })
-    console.log(gameboard.boardTiles);
+    });
   });
 
-  // // add player names
+  const body = document.querySelector('body')
+  const winnerMessage = (winner) => {
+    const message = document.createElement('h3');
+    message.textContent= `The winner is ${winner}`
+    body.appendChild(message);
+  }
 
   return { gameTiles };
 })();
