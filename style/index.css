@@ -28,7 +28,7 @@
 }
 
 .hide-gameboard{
-  display: none;
+  /* display: none; */
 }
 
 .game-tile {

@@ -1,18 +1,12 @@
-const Player = (name, marker) => {
-  const getPlayerName = () => name;
+// player
+const Player = (marker) => {
   const getPlayerMarker = () => marker;
-  return { getPlayerName, getPlayerMarker };
+  return { getPlayerMarker };
 };
-
+// display Controller Object
 const displayController = (() => {
-  // action reset on DOM
-  // add player names
-
-
   const gameTiles = document.querySelectorAll(".game-tile");
-  const player1 = Player(marker = "X");
-  const player2 = Player(marker = "O");
-  const players = [player1.getPlayerMarker(), player2.getPlayerMarker()];
+
   const winningPattern = [
     [0, 1, 2],
     [3, 4, 5],
@@ -23,19 +17,10 @@ const displayController = (() => {
     [0, 4, 8],
     [2, 4, 6],
   ];
-
+  const player1 = Player("X");
+  const player2 = Player("O");
+  const players = [player1.getPlayerMarker(), player2.getPlayerMarker()];
   let turn = players[0];
-
-  gameTiles.forEach((tile, index) => {
-    tile.addEventListener("click", (e) => {
-      e.target.textContent = turn;
-      tile.classList.add("restricted");
-      gameboard.boardTiles[index] = turn;
-      checkWinner();
-      checkDraw();
-      switchPlayers();
-    });
-  });
 
   const checkWinner = () => {
     for (let i = 0; i < winningPattern.length; i++) {
@@ -49,7 +34,7 @@ const displayController = (() => {
         )
       ) {
         // add winner action
-        return true
+        return true;
       }
     }
   };
@@ -58,19 +43,45 @@ const displayController = (() => {
     if (!gameboard.boardTiles.includes(undefined)) {
       return true;
     }
-  }
+  };
 
   const switchPlayers = () => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
   };
+  gameTiles.forEach((tile, index) => {
+    tile.addEventListener("click", (e) => {
+      e.target.textContent = turn;
+      tile.classList.add("restricted");
+      gameboard.boardTiles[index] = turn;
+      console.log(checkWinner());
+      checkDraw();
+      switchPlayers();
+    });
+  });
+
+  // // add reset function
+
+  const resetButton = document.querySelector("#reset");
+    resetButton.addEventListener("click", () => {
+    gameTiles.forEach((tile, index) => {
+      tile.textContent = ""
+      tile.classList.remove("restricted");
+
+      gameboard.boardTiles[index] = tile;
+    })
+    console.log(gameboard.boardTiles);
+  });
+
+  // // add player names
 
   return { gameTiles };
 })();
 
+// gameboard Object
+
 const gameboard = (() => {
   const boardTiles = Array(displayController.gameTiles.length);
 
-  // add reset function
   console.log(boardTiles);
   return { boardTiles };
 })();
