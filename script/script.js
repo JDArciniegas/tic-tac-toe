@@ -17,7 +17,7 @@ const displayController = (() => {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  const player1 = Player("X");
+  const player1 = (Player("X"))
   const player2 = Player("O");
   const players = [player1.getPlayerMarker(), player2.getPlayerMarker()];
   let turn = players[0];
@@ -34,6 +34,7 @@ const displayController = (() => {
         )
       ) {
         // add winner action
+        gameTiles.forEach((tile) => tile.classList.add('restricted'))
         winnerMessage(turn);
       }
     }
@@ -71,12 +72,12 @@ const displayController = (() => {
     });
   });
 
-  const body = document.querySelector('body')
+  const body = document.querySelector("body");
   const winnerMessage = (winner) => {
-    const message = document.createElement('h3');
-    message.textContent= `The winner is ${winner}`
+    const message = document.createElement("h3");
+    message.textContent = `The winner is ${winner}`;
     body.appendChild(message);
-  }
+  };
 
   return { gameTiles };
 })();
@@ -89,3 +90,4 @@ const gameboard = (() => {
   console.log(boardTiles);
   return { boardTiles };
 })();
+

@@ -77,3 +77,16 @@
 .restricted {
   pointer-events: none;
 }
+
+/* test */
+
+.player-options{
+  display: flex;
+}
+
+.player-option{
+  font-size: 48px;
+  border: 1px solid blue;
+  margin: 25px;
+  padding: 20px;
+}
