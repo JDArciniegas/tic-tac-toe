@@ -97,8 +97,16 @@ const displayController = (() => {
     form.classList.add("display-none");
   };
 
+  const rightSideOfContainer = document.querySelector(".right");
   const displayPlayers = (players) => {
-    console.log(players);
+    players.forEach((player) => {
+        let playerName = document.createElement("div");
+        let box = document.createElement("div");
+        box.classList.add('display-box');
+        playerName.textContent = player;
+        box.append(playerName);
+        rightSideOfContainer.appendChild(box);
+      });
   };
 
   return { gameTiles };
