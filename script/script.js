@@ -53,14 +53,11 @@ const displayController = (() => {
       ) {
         // add winner action
         gameTiles.forEach((tile) => tile.classList.add("restricted"));
-        return true;
+        winnerMessage(turn);
       }
     }
   };
 
-  const checkDraw = () => {
-    console.log(checkWinner());
-  };
 
   const switchPlayers = () => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
@@ -72,7 +69,6 @@ const displayController = (() => {
       tile.classList.add("restricted");
       gameboard.boardTiles[index] = turn;
       checkWinner();
-      checkDraw();
       switchPlayers();
     });
   });
@@ -81,6 +77,7 @@ const displayController = (() => {
   resetButton.addEventListener("click", () => {
     gameboard.reset();
     updateBoard();
+    resetWinnerMessage();
   });
 
   const updateBoard = () => {
@@ -93,14 +90,13 @@ const displayController = (() => {
   const mainContainer = document.querySelector(".container");
   let message = document.createElement("h3");
   const winnerMessage = (winner) => {
-    if (checkWinner() === true) {
-      message.textContent = `The winner is ${winner}`;
-      mainContainer.appendChild(message);
-    } else {
-      message.textContent = `its a Draw`;
-      mainContainer.appendChild(message);
-    }
+    message.textContent = `The winner is ${winner}`;
+    mainContainer.appendChild(message);
   };
+
+  const resetWinnerMessage = () => {
+    message.textContent = ""
+  }
 
   const game = document.querySelector(".game-container");
   const player_X_name = document.querySelector("#playerX");
@@ -140,6 +136,7 @@ const displayController = (() => {
     backButton.classList.add("display-none");
     form.classList.remove("display-none");
     rightSideOfContainer.innerHTML = "";
+    resetWinnerMessage();
   });
 
   return { gameTiles };
