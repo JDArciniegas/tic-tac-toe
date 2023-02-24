@@ -3,10 +3,10 @@ const Player = (marker) => {
   const getPlayerMarker = () => marker;
   return { getPlayerMarker };
 };
+
 // display Controller Object
 const displayController = (() => {
   const gameTiles = document.querySelectorAll(".game-tile");
-
   const winningPattern = [
     [0, 1, 2],
     [3, 4, 5],
@@ -17,7 +17,8 @@ const displayController = (() => {
     [0, 4, 8],
     [2, 4, 6],
   ];
-  const player1 = (Player("X"))
+
+  const player1 = Player("X");
   const player2 = Player("O");
   const players = [player1.getPlayerMarker(), player2.getPlayerMarker()];
   let turn = players[0];
@@ -34,7 +35,7 @@ const displayController = (() => {
         )
       ) {
         // add winner action
-        gameTiles.forEach((tile) => tile.classList.add('restricted'))
+        gameTiles.forEach((tile) => tile.classList.add("restricted"));
         winnerMessage(turn);
       }
     }
@@ -60,8 +61,6 @@ const displayController = (() => {
     });
   });
 
-  // // add reset function
-
   const resetButton = document.querySelector("#reset");
   resetButton.addEventListener("click", () => {
     gameTiles.forEach((tile, index) => {
@@ -70,6 +69,7 @@ const displayController = (() => {
       tile.classList.remove("restricted");
       gameboard.boardTiles[index] = tile;
     });
+    console.log(gameTiles);
   });
 
   const body = document.querySelector("body");
@@ -77,6 +77,28 @@ const displayController = (() => {
     const message = document.createElement("h3");
     message.textContent = `The winner is ${winner}`;
     body.appendChild(message);
+  };
+
+  const game = document.querySelector(".game-container");
+  const player_X_name = document.querySelector("#playerX");
+  const player_O_name = document.querySelector("#playerO");
+  const form = document.querySelector("form");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    let players = [player_X_name.value, player_O_name.value];
+    startGame();
+    displayPlayers(players);
+  });
+
+  const startGame = () => {
+    game.classList.remove("display-none");
+    resetButton.classList.remove("display-none");
+    form.classList.add("display-none");
+  };
+
+  const displayPlayers = (players) => {
+    console.log(players);
   };
 
   return { gameTiles };
@@ -90,4 +112,3 @@ const gameboard = (() => {
   console.log(boardTiles);
   return { boardTiles };
 })();
-
