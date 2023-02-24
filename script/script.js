@@ -4,9 +4,26 @@ const Player = (marker) => {
   return { getPlayerMarker };
 };
 
+// gameboard Object
+
+const gameboard = (() => {
+  const boardTiles = Array(9);
+  const reset = () => {
+    for (let i = 0; i < boardTiles.length; i++) {
+      boardTiles[i] = ""
+      console.log(boardTiles);
+    }
+  };
+
+  console.log(boardTiles);
+  return { boardTiles, reset };
+})();
+
 // display Controller Object
 const displayController = (() => {
   const gameTiles = document.querySelectorAll(".game-tile");
+  gameboard.boardTiles.forEach((tile) => tile.classList.add('game-tile'))
+
   const winningPattern = [
     [0, 1, 2],
     [3, 4, 5],
@@ -50,6 +67,7 @@ const displayController = (() => {
   const switchPlayers = () => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
   };
+
   gameTiles.forEach((tile, index) => {
     tile.addEventListener("click", (e) => {
       e.target.textContent = turn;
@@ -63,14 +81,15 @@ const displayController = (() => {
 
   const resetButton = document.querySelector("#reset");
   resetButton.addEventListener("click", () => {
-    gameTiles.forEach((tile, index) => {
-      tile.textContent = "";
-      turn = players[0];
-      tile.classList.remove("restricted");
-      gameboard.boardTiles[index] = tile;
-    });
-    console.log(gameTiles);
+    gameboard.reset();
+    updateBoard();
   });
+
+  const updateBoard = () => {
+    for (let i = 0; i < gameTiles.length; i++) {
+      gameTiles[i].textContent = gameboard.boardTiles[i];
+    }
+  }
 
   const body = document.querySelector("body");
   const winnerMessage = (winner) => {
@@ -83,6 +102,7 @@ const displayController = (() => {
   const player_X_name = document.querySelector("#playerX");
   const player_O_name = document.querySelector("#playerO");
   const form = document.querySelector("form");
+  const backButton = document.querySelector("#back");
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -94,29 +114,31 @@ const displayController = (() => {
   const startGame = () => {
     game.classList.remove("display-none");
     resetButton.classList.remove("display-none");
+    backButton.classList.remove("display-none");
     form.classList.add("display-none");
   };
 
   const rightSideOfContainer = document.querySelector(".right");
   const displayPlayers = (players) => {
     players.forEach((player) => {
-        let playerName = document.createElement("div");
-        let box = document.createElement("div");
-        box.classList.add('display-box');
-        playerName.textContent = player;
-        box.append(playerName);
-        rightSideOfContainer.appendChild(box);
-      });
+      let playerName = document.createElement("div");
+      let box = document.createElement("div");
+      box.classList.add("display-box");
+      playerName.textContent = player;
+      box.append(playerName);
+      rightSideOfContainer.appendChild(box);
+    });
   };
+
+  backButton.addEventListener("click", () => {
+    game.classList.add("display-none");
+    resetButton.classList.add("display-none");
+    backButton.classList.add("display-none");
+    form.classList.remove("display-none");
+    rightSideOfContainer.innerHTML = "";
+  });
 
   return { gameTiles };
 })();
 
-// gameboard Object
 
-const gameboard = (() => {
-  const boardTiles = Array(displayController.gameTiles.length);
-
-  console.log(boardTiles);
-  return { boardTiles };
-})();
