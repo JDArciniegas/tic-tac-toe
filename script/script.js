@@ -11,7 +11,6 @@ const gameboard = (() => {
   const reset = () => {
     for (let i = 0; i < boardTiles.length; i++) {
       boardTiles[i] = "";
-      console.log(boardTiles);
     }
   };
 
@@ -22,7 +21,6 @@ const gameboard = (() => {
 // display Controller Object
 const displayController = (() => {
   const gameTiles = document.querySelectorAll(".game-tile");
-  gameboard.boardTiles.forEach((tile) => tile.classList.add("game-tile"));
 
   const winningPattern = [
     [0, 1, 2],
@@ -53,11 +51,29 @@ const displayController = (() => {
       ) {
         // add winner action
         gameTiles.forEach((tile) => tile.classList.add("restricted"));
-        winnerMessage(turn);
+        return turn
       }
     }
   };
 
+  const checkDraw = () => {
+    for (let i = 0; i < winningPattern.length; i++) {
+      const pattern = winningPattern[i];
+      if (
+        pattern.every(
+          (field) => gameboard.boardTiles[field] != player1.getPlayerMarker()
+        ) ||
+        pattern.every(
+          (field) => gameboard.boardTiles[field] != player2.getPlayerMarker()
+        )
+      ) {
+        // add winner action
+        return false
+      } else {
+        return true
+      }
+    }
+  };
 
   const switchPlayers = () => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
@@ -68,8 +84,10 @@ const displayController = (() => {
       e.target.textContent = turn;
       tile.classList.add("restricted");
       gameboard.boardTiles[index] = turn;
-      checkWinner();
+      console.log(checkWinner());
+      console.log(checkDraw());
       switchPlayers();
+      console.log(gameboard.boardTiles);
     });
   });
 
@@ -95,8 +113,8 @@ const displayController = (() => {
   };
 
   const resetWinnerMessage = () => {
-    message.textContent = ""
-  }
+    message.textContent = "";
+  };
 
   const game = document.querySelector(".game-container");
   const player_X_name = document.querySelector("#playerX");
