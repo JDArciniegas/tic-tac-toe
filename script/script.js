@@ -10,7 +10,7 @@ const gameboard = (() => {
   const boardTiles = Array(9);
   const reset = () => {
     for (let i = 0; i < boardTiles.length; i++) {
-      boardTiles[i] = ""
+      boardTiles[i] = "";
       console.log(boardTiles);
     }
   };
@@ -22,7 +22,7 @@ const gameboard = (() => {
 // display Controller Object
 const displayController = (() => {
   const gameTiles = document.querySelectorAll(".game-tile");
-  gameboard.boardTiles.forEach((tile) => tile.classList.add('game-tile'))
+  gameboard.boardTiles.forEach((tile) => tile.classList.add("game-tile"));
 
   const winningPattern = [
     [0, 1, 2],
@@ -53,15 +53,13 @@ const displayController = (() => {
       ) {
         // add winner action
         gameTiles.forEach((tile) => tile.classList.add("restricted"));
-        winnerMessage(turn);
+        return true;
       }
     }
   };
 
   const checkDraw = () => {
-    if (!gameboard.boardTiles.includes(undefined)) {
-      return true;
-    }
+    console.log(checkWinner());
   };
 
   const switchPlayers = () => {
@@ -89,13 +87,19 @@ const displayController = (() => {
     for (let i = 0; i < gameTiles.length; i++) {
       gameTiles[i].textContent = gameboard.boardTiles[i];
     }
-  }
+    gameTiles.forEach((tile) => tile.classList.remove("restricted"));
+  };
 
-  const body = document.querySelector("body");
+  const mainContainer = document.querySelector(".container");
+  let message = document.createElement("h3");
   const winnerMessage = (winner) => {
-    const message = document.createElement("h3");
-    message.textContent = `The winner is ${winner}`;
-    body.appendChild(message);
+    if (checkWinner() === true) {
+      message.textContent = `The winner is ${winner}`;
+      mainContainer.appendChild(message);
+    } else {
+      message.textContent = `its a Draw`;
+      mainContainer.appendChild(message);
+    }
   };
 
   const game = document.querySelector(".game-container");
@@ -140,5 +144,3 @@ const displayController = (() => {
 
   return { gameTiles };
 })();
-
-
