@@ -64,7 +64,7 @@ const displayController = (() => {
         drawMessage();
       }
     }
-  }
+  };
 
   const switchPlayers = () => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
@@ -121,9 +121,9 @@ const displayController = (() => {
 
   form.addEventListener("submit", (e) => {
     e.preventDefault();
-    let players = [player_X_name.value, player_O_name.value];
+    let playersNames = [player_X_name.value, player_O_name.value];
     startGame();
-    displayPlayers(players);
+    displayPlayers(playersNames);
   });
 
   const startGame = () => {
@@ -133,16 +133,11 @@ const displayController = (() => {
     form.classList.add("display-none");
   };
 
-  const rightSideOfContainer = document.querySelector(".right");
+  const player_X_nameDisplay = document.querySelector("#x-name");
+  const player_O_nameDisplay = document.querySelector("#o-name");
   const displayPlayers = (players) => {
-    players.forEach((player) => {
-      let playerName = document.createElement("div");
-      let box = document.createElement("div");
-      box.classList.add("display-box");
-      playerName.textContent = player;
-      box.append(playerName);
-      rightSideOfContainer.appendChild(box);
-    });
+    player_X_nameDisplay.innerText = players[0];
+    player_O_nameDisplay.innerText = players[1];
   };
 
   backButton.addEventListener("click", () => {
@@ -150,6 +145,8 @@ const displayController = (() => {
     resetButton.classList.add("display-none");
     backButton.classList.add("display-none");
     form.classList.remove("display-none");
+    player_X_name.value = "";
+    player_O_name.value = "";
     rightSideOfContainer.innerHTML = "";
     resetWinnerMessage();
   });
