@@ -6,18 +6,26 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style/index.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gloock&family=News+Cycle:wght@400;700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
 
 <body>
   <div class="container">
-    <h1>Tic Tac Toe</h1>
+    <h1>Let's play <br> <span>Tic Tac Toe</span></h1>
 
     <form action="#">
-      <input type="text" id="playerX" placeholder="Player 1 Name">
-      <input type="text" id="playerO" placeholder="Player 2 Name">
+      <input type="text" id="playerX" placeholder="Player 1 Name" required>
+      <input type="text" id="playerO" placeholder="Player 2 Name" required>
       <input type="submit" value="Play Game">
     </form>
+
+
     <div class="game-container display-none">
       <div class="left">
         <div class="game-display">
@@ -43,10 +51,12 @@
           <h3>Player O</h3>
           <p id="o-name"></p>
         </div>
+        <div class="display-buttons">
+          <input type="submit" id="reset" class="display-none" value="Restart Game!">
+          <input type="submit" id="back" class="display-none" value="Back">
+        </div>
       </div>
     </div>
-    <button id="reset" class="display-none">Restart Game!</button>
-    <button id="back" class="display-none">Back</button>
   </div>
   <script src="script/script.js"></script>
 </body>

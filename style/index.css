@@ -1,10 +1,85 @@
+:root {
+  /* variabels */
+  --blue: #142F43;
+  --lightblue: #5CB8E4;
+  --purple: #3D087B;
+  --red: #F32424;
+  --yellow: #FFE162;
+  --white: #EEEEEE;
+
+  /* fonts */
+  --gloock: 'Gloock', serif;
+
+}
+
+body,
+html {
+  height: 100vh;
+  width: 100vw;
+  box-sizing: border-box !important;
+  background-color: var(--white);
+  font-family: var(--gloock);
+  color: var(--purple);
+}
+
 .container {
   width: 100vw;
   height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+
+/* form */
+h1 {
+  margin-top: 200px;
+  text-align: center;
+  line-height: 50px;
+}
+
+span {
+  font-size: 1.2em;
+}
+
+form {
+  padding: 25px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+input {
+  margin: 25px;
+  border-radius: 10px;
+  padding: 10px 15px;
+  font-size: 20px;
+  border-radius: 5px;
+  border-color:var(--purple) ;
+}
+
+input[type=text] {
+  width: 60%;
+  border-color: var(--purple);
+  background-color: var(--white);
+}
+
+
+input[type=submit] {
+  background-color: var(--purple);
+  border-color: var(--blue);
+  justify-self: end;
+  color: var(--white);
+  transition: bacground-color 0.25s;
+  /* transition: color 0.25s; */
+}
+
+input[type=submit]:hover {
+  background-color: var(--yellow);
+  color: var(--purple)
 }
 
 /* player markers */
@@ -28,75 +103,39 @@
 }
 
 .game-tile {
-  border-color: lightblue !important;
-  border-width: 5px !important;
   margin: 0;
   box-sizing: border-box;
   font-size: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.game-tile:first-of-type {
-  border-style: none groove groove none;
-}
-
-.game-tile:nth-of-type(2) {
-  border-style: none groove groove groove;
-}
-
-.game-tile:nth-of-type(3) {
-  border-style: none none groove groove;
-}
-
-.game-tile:nth-of-type(4) {
-  border-style: groove groove groove none;
-}
-
-.game-tile:nth-of-type(5) {
-  border-style: groove;
-}
-
-.game-tile:nth-of-type(6) {
-  border-style: groove none groove groove;
-}
-
-.game-tile:nth-of-type(7) {
-  border-style: groove groove none none;
-}
-
-.game-tile:nth-of-type(8) {
-  border-style: groove groove none groove;
-}
-
-.game-tile:nth-of-type(9) {
-  border-style: groove none none groove;
+  background-color: #3D087B;
+  margin: 5px;
+  border-radius: 25px;
 }
 
 .restricted {
   pointer-events: none;
 }
 
-.game-container{
+.game-container {
   display: flex;
   width: 80%;
 }
 
-.left, .right{
+.left,
+.right {
   width: 100%;
-  border: 1px solid black;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.right{
+.right {
   flex-direction: column;
 }
 
-.display-box{
-  border: 1px solid blue;
+.display-box {
   width: 80%;
   height: 50%;
   margin: 20px;
@@ -106,4 +145,3 @@
 .display-none {
   display: none;
 }
-
