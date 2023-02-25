@@ -1,26 +1,35 @@
-// player
 const Player = (marker) => {
   const getPlayerMarker = () => marker;
   return { getPlayerMarker };
 };
 
-// gameboard Object
+// board Object
 
-const gameboard = (() => {
-  const boardTiles = Array(9);
+const board = (() => {
+  const tiles = Array(9);
+  let availableTiles = 9;
+
   const reset = () => {
-    for (let i = 0; i < boardTiles.length; i++) {
-      boardTiles[i] = "";
+    for (let i = 0; i < tiles.length; i++) {
+      tiles[i] = "";
+      console.log(tiles);
     }
   };
 
-  console.log(boardTiles);
-  return { boardTiles, reset };
+  console.log(tiles);
+  return { tiles, reset, availableTiles };
 })();
 
 // display Controller Object
 const displayController = (() => {
   const gameTiles = document.querySelectorAll(".game-tile");
+  board.tiles.forEach((tile) => tile.classList.add("game-tile"));
+
+  const player1 = Player("X");
+  const player2 = Player("O");
+  const players = [player1.getPlayerMarker(), player2.getPlayerMarker()];
+  let turn = players[0];
+  let winnerDeclared = false;
 
   const winningPattern = [
     [0, 1, 2],
@@ -33,47 +42,29 @@ const displayController = (() => {
     [2, 4, 6],
   ];
 
-  const player1 = Player("X");
-  const player2 = Player("O");
-  const players = [player1.getPlayerMarker(), player2.getPlayerMarker()];
-  let turn = players[0];
-
   const checkWinner = () => {
-    for (let i = 0; i < winningPattern.length; i++) {
-      const pattern = winningPattern[i];
+    winningPattern.forEach((item, index) => {
+      // [0, 1, 2, 3, 4, 5, 6, 7]
       if (
-        pattern.every(
-          (field) => gameboard.boardTiles[field] == player1.getPlayerMarker()
-        ) ||
-        pattern.every(
-          (field) => gameboard.boardTiles[field] == player2.getPlayerMarker()
-        )
+        board.tiles[item[0]] === turn &&
+        board.tiles[item[1]] === turn &&
+        board.tiles[item[2]] === turn
       ) {
-        // add winner action
-        gameTiles.forEach((tile) => tile.classList.add("restricted"));
-        return turn
+        winnerDeclared = true;
+        winnerMessage(turn);
       }
-    }
+    });
   };
 
   const checkDraw = () => {
-    for (let i = 0; i < winningPattern.length; i++) {
-      const pattern = winningPattern[i];
-      if (
-        pattern.every(
-          (field) => gameboard.boardTiles[field] != player1.getPlayerMarker()
-        ) ||
-        pattern.every(
-          (field) => gameboard.boardTiles[field] != player2.getPlayerMarker()
-        )
-      ) {
-        // add winner action
-        return false
-      } else {
-        return true
+    if (winnerDeclared == false) {
+      if (board.availableTiles > 0) {
+        switchPlayers();
+      } else if (board.availableTiles == 0) {
+        drawMessage();
       }
     }
-  };
+  }
 
   const switchPlayers = () => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
@@ -83,24 +74,25 @@ const displayController = (() => {
     tile.addEventListener("click", (e) => {
       e.target.textContent = turn;
       tile.classList.add("restricted");
-      gameboard.boardTiles[index] = turn;
-      console.log(checkWinner());
-      console.log(checkDraw());
-      switchPlayers();
-      console.log(gameboard.boardTiles);
+      board.tiles[index] = turn;
+      board.availableTiles -= 1;
+      checkWinner();
+      checkDraw();
     });
   });
 
   const resetButton = document.querySelector("#reset");
   resetButton.addEventListener("click", () => {
-    gameboard.reset();
+    board.reset();
     updateBoard();
     resetWinnerMessage();
+    winnerDeclared = false;
+    board.availableTiles = 9;
   });
 
   const updateBoard = () => {
     for (let i = 0; i < gameTiles.length; i++) {
-      gameTiles[i].textContent = gameboard.boardTiles[i];
+      gameTiles[i].textContent = board.tiles[i];
     }
     gameTiles.forEach((tile) => tile.classList.remove("restricted"));
   };
@@ -109,6 +101,11 @@ const displayController = (() => {
   let message = document.createElement("h3");
   const winnerMessage = (winner) => {
     message.textContent = `The winner is ${winner}`;
+    mainContainer.appendChild(message);
+  };
+
+  const drawMessage = () => {
+    message.textContent = `Its a Draw`;
     mainContainer.appendChild(message);
   };
 
