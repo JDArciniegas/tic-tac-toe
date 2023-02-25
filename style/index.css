@@ -34,7 +34,7 @@ html {
 
 /* form */
 h1 {
-  margin-top: 200px;
+  /* margin-top: 125px; */
   text-align: center;
   line-height: 50px;
 }
@@ -91,6 +91,7 @@ input[type=submit]:hover {
   margin: 25px 3px;
 }
 
+
 /* GAMEBOARD BORDERS */
 .gameboard {
   display: grid;
@@ -110,11 +111,20 @@ input[type=submit]:hover {
   align-items: center;
   justify-content: center;
   background-color: #3D087B;
+  color: var(--yellow);
   margin: 5px;
   border-radius: 25px;
+  transition: background-color 0.25s;
+  cursor: pointer;
+}
+
+.game-tile:hover{
+  color: var(--purple);
+  background-color: var(--yellow);
 }
 
 .restricted {
+  cursor: not-allowed !important;
   pointer-events: none;
 }
 

@@ -81,6 +81,13 @@ const displayController = (() => {
     });
   });
 
+    gameTiles.forEach((tile) => {
+      tile.addEventListener("mouseover", (e) => {
+        tile.style.content = `${turn}`;
+      });
+    });
+
+
   const resetButton = document.querySelector("#reset");
   resetButton.addEventListener("click", () => {
     board.reset();
