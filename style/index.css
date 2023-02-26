@@ -9,7 +9,6 @@
 
   /* fonts */
   --gloock: 'Gloock', serif;
-
 }
 
 body,
@@ -58,13 +57,17 @@ input {
   padding: 10px 15px;
   font-size: 20px;
   border-radius: 5px;
-  border-color:var(--purple) ;
+  border-color: var(--purple);
 }
 
 input[type=text] {
   width: 60%;
-  border-color: var(--purple);
+  border: 3px solid var(--purple);
   background-color: var(--white);
+}
+
+input::placeholder{
+  color: var(--purple);
 }
 
 
@@ -74,7 +77,14 @@ input[type=submit] {
   justify-self: end;
   color: var(--white);
   transition: bacground-color 0.25s;
+  outline: 1px solid transparent;
   /* transition: color 0.25s; */
+}
+
+input:focus {
+  outline: 1px solid transparent;
+  background-color: var(--yellow);
+  color: var(--purple);
 }
 
 input[type=submit]:hover {
@@ -118,7 +128,7 @@ input[type=submit]:hover {
   cursor: pointer;
 }
 
-.game-tile:hover{
+.game-tile:hover {
   color: var(--purple);
   background-color: var(--yellow);
 }
