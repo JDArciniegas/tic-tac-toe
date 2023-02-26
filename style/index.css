@@ -1,11 +1,9 @@
 :root {
   /* variabels */
-  --blue: #142F43;
-  --lightblue: #5CB8E4;
   --purple: #3D087B;
-  --red: #F32424;
   --yellow: #FFE162;
   --lightpurple: #DBCDE0;
+  --white: #dfdfdf;
 
   /* fonts */
   --gloock: 'Gloock', serif;
@@ -22,7 +20,7 @@ html {
   height: 100vh;
   width: 100vw;
   box-sizing: border-box !important;
-  background-color: var(--lightpurple);
+  background-color: var(--white);
   font-family: var(--gloock);
   color: var(--purple);
 }
@@ -91,11 +89,13 @@ input:focus {
   outline: 1px solid transparent;
   background-color: var(--yellow);
   color: var(--purple);
+  border-color: var(--purple);
 }
 
 input[type=submit]:hover {
   background-color: var(--yellow);
-  color: var(--purple)
+  color: var(--purple);
+  border-color: var(--purple);
 }
 
 /* player markers */
