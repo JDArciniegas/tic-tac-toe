@@ -71,22 +71,23 @@ const displayController = (() => {
   };
 
   gameTiles.forEach((tile, index) => {
+    tile.addEventListener("mouseover", (e) => {
+      if (!e.target.classList.contains('restricted')) {
+        e.target.setAttribute("data-tooltip", turn);
+      }
+    });
+
     tile.addEventListener("click", (e) => {
-      e.target.textContent = turn;
-      tile.classList.add("restricted");
-      board.tiles[index] = turn;
-      board.availableTiles -= 1;
-      checkWinner();
-      checkDraw();
+      if (e.target.textContent === "") {
+        e.target.textContent = turn;
+        tile.classList.add("restricted");
+        board.tiles[index] = turn;
+        board.availableTiles -= 1;
+        checkWinner();
+        checkDraw();
+      }
     });
   });
-
-    gameTiles.forEach((tile) => {
-      tile.addEventListener("mouseover", (e) => {
-        tile.style.content = `${turn}`;
-      });
-    });
-
 
   const resetButton = document.querySelector("#reset");
   resetButton.addEventListener("click", () => {

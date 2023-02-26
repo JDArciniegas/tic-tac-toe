@@ -125,8 +125,17 @@ input[type=submit]:hover {
   margin: 5px;
   border-radius: 25px;
   transition: background-color 0.25s;
+  transition: color 0.25s;
   cursor: pointer;
 }
+
+.game-tile:hover:after {
+  content: attr(data-tooltip);
+  display: block;
+  color: var(--purple);
+}
+
+
 
 .game-tile:hover {
   color: var(--purple);
@@ -134,7 +143,6 @@ input[type=submit]:hover {
 }
 
 .restricted {
-  cursor: not-allowed !important;
   pointer-events: none;
 }
 
