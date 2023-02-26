@@ -6,12 +6,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="style/index.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gloock&family=News+Cycle:wght@400;700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gloock&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Gloock&family=Orbitron&display=swap" rel="stylesheet">
   <title>Document</title>
 </head>
 
@@ -25,9 +22,13 @@
       <input type="submit" value="Play Game">
     </form>
 
-
     <div class="game-container display-none">
-      <div class="left">
+      <div class=" left display-box player1">
+        <h1 id="x-name"></h1>
+        <h1 class="playerMarker">X</h1>
+      </div>
+
+      <div class="middle">
         <div class="game-display">
           <div class="gameboard hide-gameboard">
             <div class="game-tile" data-index="1"></div>
@@ -42,20 +43,14 @@
           </div>
         </div>
       </div>
-      <div class="right">
-        <div class="display-box player1">
-          <h2 id="x-name"></h2>
-          <h2 class="playerMarker">X</h2>
-        </div>
-        <div class="display-box player2">
-          <h2 id="o-name"></h2>
-          <h2 class="playerMarker">O</h2>
-        </div>
-        <div class="display-buttons">
-          <input type="submit" id="reset" class="display-none" value="Restart Game!">
-          <input type="submit" id="back" class="display-none" value="Back">
-        </div>
+      <div class="right display-box player2">
+        <h1 id="o-name"></h1>
+        <h1 class="playerMarker">O</h1>
       </div>
+    </div>
+    <div class="display-buttons">
+      <input type="submit" id="reset" class="display-none" value="Restart Game!">
+      <input type="submit" id="back" class="display-none" value="Back">
     </div>
   </div>
   <script src="script/script.js"></script>

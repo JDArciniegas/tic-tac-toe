@@ -72,7 +72,7 @@ const displayController = (() => {
 
   gameTiles.forEach((tile, index) => {
     tile.addEventListener("mouseover", (e) => {
-      if (!e.target.classList.contains('restricted')) {
+      if (!e.target.classList.contains("restricted")) {
         e.target.setAttribute("data-tooltip", turn);
       }
     });
