@@ -13,6 +13,9 @@
   --border-radius-lg: 5px;
   --border-radius-md: 10px;
   --border-radius-lg: 25px;
+
+  /* tile sizes */
+  --tile-size: 150px;
 }
 
 body,
@@ -60,13 +63,13 @@ input {
   padding: 10px 15px;
   font-size: 20px;
   border-radius: 5px;
+  border: 3px solid var(--purple);
   border-color: var(--purple);
   color: var(--purple)
 }
 
 input[type=text] {
   width: 60%;
-  border: 3px solid var(--purple);
   background-color: var(--lightpurple);
 }
 
@@ -77,11 +80,12 @@ input::placeholder {
 
 input[type=submit] {
   background-color: var(--purple);
-  border-color: var(--blue);
+  border-color: var(--purple);
   justify-self: end;
   color: var(--lightpurple);
   transition: bacground-color 0.25s;
   outline: 1px solid transparent;
+  border-radius: var(--border-radius-md);
   /* transition: color 0.25s; */
 }
 
@@ -110,19 +114,19 @@ input[type=submit]:hover {
 
 /* GAMEBOARD BORDERS */
 .gameboard {
+  margin-top: 25px;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(3, 1fr);
   column-gap: 0px;
   row-gap: 0px;
-  width: 600px;
-  height: 600px;
 }
 
 .game-tile {
-  margin: 0;
+  font-size: calc(var(--tile-size) * 0.8);
+  width: var(--tile-size);
+  height: var(--tile-size);
   box-sizing: border-box;
-  font-size: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -154,46 +158,81 @@ input[type=submit]:hover {
 
 .game-container {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
   width: 80%;
 }
 
-.left,
-.middle,
-.right {
-  width: 100%;
+.scoreboard {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  width: 50%;
+  background-color: var(--purple);
+  color:var(--yellow)
 }
 
-.left,
-.right {
-  height: 50%;
-  background-color: var(--yellow);
-  border: 3px solid var(--purple);
-  border-radius: var(--border-radius-lg)
+strong{
+  font-size: 24px;
 }
 
-.display-buttons {
-  margin-top: 100px;
+.player1,
+.player2 {
+  display: flex;
+  justify-content: space-evenly;
+  width: 50%;
 }
 
-#x-name, #o-name{
+#x-name,
+#o-name {
   font-family: var(--orbitron);
-}
-
-.display-box {
-  width: 25%;
-  height: 25%;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
 }
 
 .display-none {
   display: none;
 }
+
+/* The Modal (background) */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+  border-radius: var(--border-radius-lg);
+}
+
+/* Modal Content/Box */
+.modal-content {
+  background-color: var(--white);
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  padding: 20px;
+  color: var(--purple);
+  width: 80%;
+  /* Could be more or less, depending on screen size */
+}
+
+.modal-content .display-buttons{
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+}
+
+
+
+

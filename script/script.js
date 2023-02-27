@@ -28,6 +28,8 @@ const displayController = (() => {
   const player1 = Player("X");
   const player2 = Player("O");
   const players = [player1.getPlayerMarker(), player2.getPlayerMarker()];
+
+  // checkWinner
   let turn = players[0];
   let winnerDeclared = false;
 
@@ -56,6 +58,23 @@ const displayController = (() => {
     });
   };
 
+  // winner Message
+  const message = document.querySelector("#winning-message");
+  const modal = document.getElementById("myModal");
+
+  const winnerMessage = (winner) => {
+    message.textContent = `${winner}'s win`;
+    modal.style.display = "block";
+    gameTiles.forEach((tile) => tile.classList.add("restricted"));
+  };
+  window.onclick = function (event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
+  // check Draw
+
   const checkDraw = () => {
     if (winnerDeclared == false) {
       if (board.availableTiles > 0) {
@@ -66,9 +85,52 @@ const displayController = (() => {
     }
   };
 
+  // draw message
+  const drawMessage = () => {
+    message.textContent = `Its a Draw`;
+    mainContainer.appendChild(message);
+  };
+
+  // reset winner message
+  const resetWinnerMessage = () => {
+    message.textContent = "";
+  };
+
+  // switch players
   const switchPlayers = () => {
     turn === players[0] ? (turn = players[1]) : (turn = players[0]);
   };
+
+  // update Board
+  const updateBoard = () => {
+    for (let i = 0; i < gameTiles.length; i++) {
+      gameTiles[i].textContent = board.tiles[i];
+    }
+    gameTiles.forEach((tile) => tile.classList.remove("restricted"));
+  };
+
+  // start Game
+    const startGame = () => {
+      game.classList.remove("display-none");
+      resetButton.classList.remove("display-none");
+      backButton.classList.remove("display-none");
+      form.classList.add("display-none");
+      board.reset();
+      updateBoard();
+      winnerDeclared = false;
+    };
+
+    // display Players
+      const player_X_nameDisplay = document.querySelector("#x-name");
+      const player_O_nameDisplay = document.querySelector("#o-name");
+      const displayPlayers = (players) => {
+        player_X_nameDisplay.innerText = players[0];
+        player_O_nameDisplay.innerText = players[1];
+      };
+
+
+
+  // events
 
   gameTiles.forEach((tile, index) => {
     tile.addEventListener("mouseover", (e) => {
@@ -96,30 +158,8 @@ const displayController = (() => {
     resetWinnerMessage();
     winnerDeclared = false;
     board.availableTiles = 9;
+    modal.style.display = "none";
   });
-
-  const updateBoard = () => {
-    for (let i = 0; i < gameTiles.length; i++) {
-      gameTiles[i].textContent = board.tiles[i];
-    }
-    gameTiles.forEach((tile) => tile.classList.remove("restricted"));
-  };
-
-  const mainContainer = document.querySelector(".container");
-  let message = document.createElement("h3");
-  const winnerMessage = (winner) => {
-    message.textContent = `The winner is ${winner}`;
-    mainContainer.appendChild(message);
-  };
-
-  const drawMessage = () => {
-    message.textContent = `Its a Draw`;
-    mainContainer.appendChild(message);
-  };
-
-  const resetWinnerMessage = () => {
-    message.textContent = "";
-  };
 
   const game = document.querySelector(".game-container");
   const player_X_name = document.querySelector("#playerX");
@@ -134,29 +174,16 @@ const displayController = (() => {
     displayPlayers(playersNames);
   });
 
-  const startGame = () => {
-    game.classList.remove("display-none");
-    resetButton.classList.remove("display-none");
-    backButton.classList.remove("display-none");
-    form.classList.add("display-none");
-  };
 
-  const player_X_nameDisplay = document.querySelector("#x-name");
-  const player_O_nameDisplay = document.querySelector("#o-name");
-  const displayPlayers = (players) => {
-    player_X_nameDisplay.innerText = players[0];
-    player_O_nameDisplay.innerText = players[1];
-  };
-
-  backButton.addEventListener("click", () => {
+  backButton.addEventListener("click", (e) => {
     game.classList.add("display-none");
     resetButton.classList.add("display-none");
     backButton.classList.add("display-none");
     form.classList.remove("display-none");
     player_X_name.value = "";
     player_O_name.value = "";
-    rightSideOfContainer.innerHTML = "";
     resetWinnerMessage();
+    modal.style.display = "none";
   });
 
   return { gameTiles };
